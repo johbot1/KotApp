@@ -1,10 +1,7 @@
-/*Stylizes the h1 element */
+/* Styles the <h1> element */
 h1 {
-    font-size: 85px; /* Sets the font to 85 */
-    text-align: center;/* Centers the message on the Screen */
-    margin-top: 20%;/* Pushes the text down */
-    color: #333;;/* Sets the text color to Grey */
-    background-color: #a1eae1; /* Sets the background color */
+    font-size: 85px;
+    color: #333;
 }
 
 /* Apply background color to the entire page */
