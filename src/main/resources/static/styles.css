@@ -1,0 +1,19 @@
+/*Stylizes the h1 element */
+h1 {
+    font-size: 85px; /* Sets the font to 85 */
+    text-align: center;/* Centers the message on the Screen */
+    margin-top: 20%;/* Pushes the text down */
+    color: #333;;/* Sets the text color to Grey */
+    background-color: #a1eae1; /* Sets the background color */
+}
+
+/* Apply background color to the entire page */
+body {
+    background-color: #a1eae1; /* Soft teal background */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Ensures full coverage */
+    height: 100vh; /* Makes sure it covers the full viewport height */
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+}

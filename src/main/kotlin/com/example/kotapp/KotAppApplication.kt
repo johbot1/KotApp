@@ -1,24 +1,20 @@
 package com.example.kotapp
 
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.boot.runApplication
 
+/**
+ * Main entry point for the Spring Boot application
+ * The @SpringBootApplication annotation enables auto-config,
+ * component scanning, and other Spring Boot Features.
+ */
 @SpringBootApplication
-@RestController
-class DemoApplication {
-	@GetMapping("/hello")
-	fun hello(@RequestParam(value = "name", defaultValue = "World") name: String?): String {
-		return String.format("Hello %s!", name)
-	}
-	companion object {
-		@JvmStatic
-		fun main(args: Array<String>) {
-			SpringApplication.run(DemoApplication::class.java, *args)
-		}
-	}
+class KotAppApplication
+
+/**
+ * The main funciton starts the Spring Boot application.
+ * runApplicaiton<>(*args) is a kotlin friendly way to start the app.
+ */
+fun main(args: Array<String>) {
+	runApplication<KotAppApplication>(*args)
 }
-
-
