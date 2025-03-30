@@ -3,23 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- Link to external CSS file for styling -->
+    <title>Mood Journal</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- Navigation Bar -->
-<nav>
-    <ul>
-        <li><a href="#">Section 1</a></li>
-        <li><a href="#">Section 2</a></li>
-        <li><a href="#">Section 3</a></li>
-    </ul>
-</nav>
-<!-- Main Content -->
 <div class="container">
-    <h1>Hello World</h1>
+    <nav>
+        <div class="nav-title">Mood Journal</div>
+        <div class="today-date">Today: {DATE}</div>
+    </nav>
+
+    <div class="sliders-container">
+        <div class="slider-container">
+            <label for="depressionMania">Depression/Mania: <span id="depressionManiaValue">0</span></label>
+            <input type="range" id="depressionMania" name="depressionMania" min="-10" max="10" value="0" step="1">
+            <div class="slider-ticks"></div>
+        </div>
+
+        <div class="slider-container">
+            <label for="anxiety">Anxiety: <span id="anxietyValue">0</span></label>
+            <input type="range" id="anxiety" name="anxiety" min="0" max="10" value="0" step="1">
+            <div class="slider-ticks"></div>
+        </div>
+
+        <div class="slider-container">
+            <label for="irritability">Irritability: <span id="irritabilityValue">0</span></label>
+            <input type="range" id="irritability" name="irritability" min="0" max="10" value="0" step="1">
+            <div class="slider-ticks"></div>
+        </div>
+
+        <div class="slider-container">
+            <label for="energyLvl">Energy Lvl: <span id="energyLvlValue">0</span></label>
+            <input type="range" id="energyLvl" name="energyLvl" min="0" max="5" value="0" step="1">
+            <div class="slider-ticks"></div>
+        </div>
+    </div>
+
+    <div class="notes-container">
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="notes"></textarea>
+    </div>
+
+    <button type="submit" class="save-button">Save Journal</button>
 </div>
 
+<script>
+    // Update slider value displays
+    function updateSliderValue(inputId, valueId) {
+        document.getElementById(inputId).addEventListener('input', function() {
+            document.getElementById(valueId).textContent = this.value;
+        });
+    }
+
+    updateSliderValue('depressionMania', 'depressionManiaValue');
+    updateSliderValue('anxiety', 'anxietyValue');
+    updateSliderValue('irritability', 'irritabilityValue');
+    updateSliderValue('energyLvl', 'energyLvlValue');
+
+    // Function to create ticks for each slider
+    function createSliderTicks(sliderId, tickCount) {
+        const slider = document.getElementById(sliderId);
+        const ticksContainer = slider.nextElementSibling; // Get the slider-ticks div
+
+        for (let i = 0; i < tickCount; i++) {
+            const tick = document.createElement('div');
+            tick.className = 'slider-tick';
+            ticksContainer.appendChild(tick);
+        }
+    }
+
+    // Create ticks for each slider
+    createSliderTicks('depressionMania', 21);
+    createSliderTicks('anxiety', 11);
+    createSliderTicks('irritability', 11);
+    createSliderTicks('energyLvl', 6);
+
+</script>
 </body>
 </html>

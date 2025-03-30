@@ -2,16 +2,16 @@
 
 ## 1. Project Setup and Basic Structure
 
-* **1.1 Project Initialization:**
-    * Initialize a new Kotlin project using Gradle or Maven.
-    * Choose a web framework (e.g., Ktor with kotlinx-html for simple UI).
-    * Set up the project structure with appropriate directories (e.g., `src/main/kotlin`, `src/test/kotlin`, `resources/static`).
-* **1.2 Basic HTML Structure and Form:**
-    * Create a basic HTML page with the mood journal form:
-        * Four sliders (one -10 to 10, two 0 to 10, one 0 to 5).
+* **1.1 Project Initialization:** ✅
+    * Initialize a new Kotlin project using Gradle or Maven. ✅
+    * Choose a web framework (e.g., Ktor with kotlinx-html for simple UI). ✅
+    * Set up the project structure with appropriate directories (e.g., `src/main/kotlin`, `src/test/kotlin`, `resources/static`). ✅
+* **1.2 Basic HTML Structure and Form:** 
+    * Create a basic HTML page with the mood journal form: ✅
+        * Four sliders (one -10 to 10, two 0 to 10, one 0 to 5). ✅
         * Five checkboxes with symptom labels.
-        * A text area for notes.
-        * A "Save" button.
+        * A text area for notes. ✅ 
+        * A "Save" button. ✅
     * Set up basic routing in Ktor to serve the HTML page.
 * **1.3 Basic Input Handling:**
     * Implement Ktor routes to handle form submissions.
