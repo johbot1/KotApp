@@ -6,14 +6,14 @@
     * Initialize a new Kotlin project using Gradle or Maven. ✅
     * Choose a web framework (e.g., Ktor with kotlinx-html for simple UI). ✅
     * Set up the project structure with appropriate directories (e.g., `src/main/kotlin`, `src/test/kotlin`, `resources/static`). ✅
-* **1.2 Basic HTML Structure and Form:** 
+* **1.2 Basic HTML Structure and Form:** ✅
     * Create a basic HTML page with the mood journal form: ✅
         * Four sliders (one -10 to 10, two 0 to 10, one 0 to 5). ✅
         * Five checkboxes with symptom labels.
         * A text area for notes. ✅ 
         * A "Save" button. ✅
-    * Set up basic routing in Ktor to serve the HTML page.
-* **1.3 Basic Input Handling:**
+    * Set up basic routing in Ktor to serve the HTML page. ✅
+* **1.3 Basic Input Handling:** 
     * Implement Ktor routes to handle form submissions.
     * Parse the form data from the request.
     * Add logging for form data.
@@ -36,17 +36,6 @@
 * **3.1 CSV Data Parsing:**
     * Implement a function to read and parse the CSV file into a list of mood journal data objects.
     * Handle potential errors during file reading and parsing.
-* **3.2 Data Aggregation:**
-    * Aggregate the data for the line graph (e.g., average mood over time).
-    * Provide functionality to filter the data.
-* **3.3 Graphing Library Integration:**
-    * Choose a JavaScript graphing library (e.g., Chart.js, Plotly.js).
-    * Include the library in the HTML page.
-    * Create a Ktor endpoint to provide the aggregated data as JSON.
-    * Use Javascript to fetch JSON data, and render the graph.
-* **3.4 Displaying the Graph:**
-    * Create a canvas element in the HTML page to display the graph.
-    * Use JavaScript to render the line graph using the parsed data.
 
 ## 4. Local Testing and Refinement
 
