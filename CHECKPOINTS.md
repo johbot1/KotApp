@@ -1,10 +1,10 @@
 # Kotlin Web App Development Checkpoints: Local Mood Journal
 
-## 1. Project Setup and Basic Structure
+## 1. Project Setup and Basic Structure ✅
 
 * **1.1 Project Initialization:** ✅
-    * Initialize a new Kotlin project using Gradle or Maven. ✅
-    * Choose a web framework (e.g., Ktor with kotlinx-html for simple UI). ✅
+    * Initialize a new Kotlin project using Gradle  ✅
+    * Choose a web framework (Chose SpringBoot). ✅
     * Set up the project structure with appropriate directories (e.g., `src/main/kotlin`, `src/test/kotlin`, `resources/static`). ✅
 * **1.2 Basic HTML Structure and Form:** ✅
     * Create a basic HTML page with the mood journal form: ✅
@@ -13,10 +13,10 @@
         * A text area for notes. ✅ 
         * A "Save" button. ✅
     * Set up basic routing in Ktor to serve the HTML page. ✅
-* **1.3 Basic Input Handling:** 
-    * Implement Ktor routes to handle form submissions.
-    * Parse the form data from the request.
-    * Add logging for form data.
+* **1.3 Basic Input Handling:** ✅
+    * Implement ~~Ktor~~ SpringBoot routes to handle form submissions. ✅
+    * Parse the form data from the request. ✅
+    * Add logging for form data. ✅
 
 ## 2. Data Handling and CSV Output
 
