@@ -39,19 +39,39 @@
         </div>
     </div>
 
-    <div class="checkboxes-container">
-        <label><input type="checkbox" name="symptom" value="insomnia"> Insomnia</label>
-        <label><input type="checkbox" name="symptom" value="appetiteLoss"> Appetite Loss</label>
-        <label><input type="checkbox" name="symptom" value="racingThoughts"> Racing Thoughts</label>
-        <label><input type="checkbox" name="symptom" value="socialWithdrawal"> Social Withdrawal</label>
-        <label><input type="checkbox" name="symptom" value="moodSwings"> Mood Swings</label>
-    </div>
+    <div class="extra-inputs">
+        <div class="checkboxes-container">
+            <input type="checkbox" id="migraineProdrome" name="symptom" value="migraineProdrome">
+            <label for="migraineProdrome" class="pill migraine-prodrome">Migraine Prodrome</label>
+
+            <input type="checkbox" id="bechetsFlare" name="symptom" value="bechetsFlare">
+            <label for="bechetsFlare" class="pill bechets-flare">Bechets Flare</label>
+
+            <input type="checkbox" id="spotting" name="symptom" value="spotting">
+            <label for="spotting" class="pill spotting">Spotting</label>
+
+            <input type="checkbox" id="blankPills" name="symptom" value="blankPills">
+            <label for="blankPills" class="pill blank-pills">Blank Pills</label>
+
+            <input type="checkbox" id="nightSweats" name="symptom" value="nightSweats">
+            <label for="nightSweats" class="pill night-sweats">Night Sweats / Nightmares</label>
+
+            <input type="checkbox" id="anomalousEvent" name="symptom" value="anomalousEvent">
+            <label for="anomalousEvent" class="pill anomalous-event">Anomalous Event</label>
+
+            <input type="checkbox" id="migraineHeadache" name="symptom" value="migraineHeadache">
+            <label for="migraineHeadache" class="pill migraine-headache">★ Migraine Headache</label>
 
 
-    <div class="notes-container">
-        <label for="notes">Notes:</label>
-        <textarea id="notes" name="notes"></textarea>
+        </div>
+
+
+        <div class="notes-container">
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes"></textarea>
+        </div>
     </div>
+
 
     <button type="submit" class="save-button">Save Journal</button>
 </div>
