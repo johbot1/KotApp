@@ -33,3 +33,11 @@ const formattedDate = todayDate.toLocaleDateString(undefined, {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
 });
 document.querySelector('.today-date').textContent = `Today: ${formattedDate}`;
+
+//  Save button saving the "Symptoms"
+document.querySelector('.save-button').addEventListener('click', () => {
+    const selectedSymptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked'))
+        .map(checkbox => checkbox.value);
+
+    console.log("Selected symptoms:", selectedSymptoms);
+});
