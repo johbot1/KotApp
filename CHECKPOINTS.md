@@ -9,7 +9,7 @@
 * **1.2 Basic HTML Structure and Form:** ✅
     * Create a basic HTML page with the mood journal form: ✅
         * Four sliders (one -10 to 10, two 0 to 10, one 0 to 5). ✅
-        * Five checkboxes with symptom labels.
+        * Five checkboxes with symptom labels. ✅
         * A text area for notes. ✅ 
         * A "Save" button. ✅
     * Set up basic routing in Ktor to serve the HTML page. ✅
