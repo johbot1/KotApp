@@ -34,10 +34,36 @@ const formattedDate = todayDate.toLocaleDateString(undefined, {
 });
 document.querySelector('.today-date').textContent = `Today: ${formattedDate}`;
 
-//  Save button saving the "Symptoms"
+//  Save button saving the journal
 document.querySelector('.save-button').addEventListener('click', () => {
+    // Get selected symptoms
     const selectedSymptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked'))
         .map(checkbox => checkbox.value);
 
-    console.log("Selected symptoms:", selectedSymptoms);
+    // Add "workout" if checked
+    if (document.getElementById('workout').checked) {
+        selectedSymptoms.push('workout');
+    }
+
+    // Get slider values
+    const sliderData = {
+        depressionMania: document.getElementById('depressionMania').value,
+        anxiety: document.getElementById('anxiety').value,
+        irritability: document.getElementById('irritability').value,
+        energyLvl: document.getElementById('energyLvl').value
+    };
+
+    // Grab notes too
+    const notes = document.getElementById('notes').value;
+
+    // Build the final journal entry
+    const journalEntry = {
+        date: new Date().toISOString(),
+        symptoms: selectedSymptoms,
+        sliders: sliderData,
+        notes: notes
+    };
+
+    console.log("Saved Journal Entry:", journalEntry);
 });
+
