@@ -36,16 +36,15 @@ document.querySelector('.today-date').textContent = `Today: ${formattedDate}`;
 
 //  Save button saving the journal
 document.querySelector('.save-button').addEventListener('click', () => {
-    // Get selected symptoms
+    // Collect symptoms
     const selectedSymptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked'))
         .map(checkbox => checkbox.value);
 
-    // Add "workout" if checked
     if (document.getElementById('workout').checked) {
         selectedSymptoms.push('workout');
     }
 
-    // Get slider values
+    // Collects the slider values
     const sliderData = {
         depressionMania: document.getElementById('depressionMania').value,
         anxiety: document.getElementById('anxiety').value,
@@ -53,10 +52,37 @@ document.querySelector('.save-button').addEventListener('click', () => {
         energyLvl: document.getElementById('energyLvl').value
     };
 
-    // Grab notes too
-    const notes = document.getElementById('notes').value;
+    // Collects the notes
+    const notes = document.getElementById('notes').value.trim();
 
-    // Build the final journal entry
+    // Basic validation
+    const hasAnyData =
+        selectedSymptoms.length > 0 ||
+        Object.values(sliderData).some(val => parseInt(val) !== 0) ||
+        notes.length > 0;
+
+    const saveMessage = document.getElementById('saveMessage');
+
+// Validation block (replaces alert for empty)
+    if (!hasAnyData) {
+        saveMessage.textContent = "Please enter at least one mood, symptom, or note.";
+        saveMessage.style.color = "red";
+        saveMessage.classList.add("show");
+        return;
+    }
+
+// Message displays after successfully saving
+    saveMessage.textContent = "Journal entry saved!";
+    saveMessage.style.color = "green";
+    saveMessage.classList.add("show");
+
+// Hides after a few seconds
+    setTimeout(() => {
+        saveMessage.classList.remove("show");
+    }, 4000);
+
+
+    // Builds the Journal Entry Object
     const journalEntry = {
         date: new Date().toISOString(),
         symptoms: selectedSymptoms,
@@ -66,4 +92,5 @@ document.querySelector('.save-button').addEventListener('click', () => {
 
     console.log("Saved Journal Entry:", journalEntry);
 });
+
 
