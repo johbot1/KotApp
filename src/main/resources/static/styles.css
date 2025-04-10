@@ -1,4 +1,4 @@
-/* Apply background color to the entire page */
+/* ───────────── Base Layout ───────────── */
 body {
     background-color: #a1eae1; /* Soft teal background */
     font-family: sans-serif;
@@ -8,11 +8,12 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    }
+}
+
 .container {
-    width: 80%; /* Adjust as needed */
-    max-width: 1200px; /* Adjust as needed */
-    background-color: #e0fbfc; /* Light gray background for the container */
+    width: 80%;
+    max-width: 1200px;
+    background-color: #e0fbfc;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -20,9 +21,10 @@ body {
     flex-direction: column;
 }
 
+/* ───────────── Nav Bar ───────────── */
 nav {
     width: 100%;
-    background-color: #d8e2dc; /* Light gray for nav bar */
+    background-color: #d8e2dc;
     color: black;
     padding: 10px 20px;
     box-sizing: border-box;
@@ -36,6 +38,7 @@ nav {
     font-size: 1.5em;
 }
 
+/* ───────────── Sliders ───────────── */
 .sliders-container {
     display: flex;
     flex-direction: column;
@@ -72,23 +75,33 @@ input[type="range"] {
     background-color: #999;
 }
 
-.notes-container {
-    width: 40%;
-    align-self: flex-end; /* Align to the right side */
+/* ───────────── Notes + Checkboxes Layout ───────────── */
+.extra-inputs {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
     margin-bottom: 20px;
 }
 
+.checkboxes-container,
+.notes-container {
+    flex: 1;
+}
+
+/* ───────────── Notes Styling ───────────── */
 .notes-container label {
     display: block;
     margin-bottom: 5px;
 }
 
-#notes {
+.notes-container textarea {
     width: 100%;
     height: 150px;
     box-sizing: border-box;
 }
 
+/* ───────────── Save Button ───────────── */
 .save-button {
     background-color: #e0fbfc;
     color: black;
@@ -98,17 +111,62 @@ input[type="range"] {
     cursor: pointer;
     align-self: center;
 }
+
+/* ───────────── Pill Buttons ───────────── */
 .checkboxes-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
-    width: 60%;
-    max-width: 600px;
-    margin-bottom: 20px;
+    align-items: center;
 }
-.checkboxes-container label {
-    font-size: 1rem;
+
+.checkboxes-container input[type="checkbox"] {
+    display: none;
+}
+
+.pill {
+    background-color: #d8e2dc;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
+}
+
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .pill {
+    color: white;
+}
+
+/* ───────────── Custom Pill Colors ───────────── */
+.migraine-prodrome {
+    background-color: #d8b4f8; /* Light purple */
+}
+
+.bechets-flare {
+    background-color: #ff6b6b; /* Red */
+}
+
+.spotting {
+    background-color: #333; /* Black */
+    color: white;
+}
+
+.blank-pills {
+    background-color: #4caf50; /* Green */
+}
+
+.night-sweats {
+    background-color: #4f8de0; /* Blue */
+}
+
+.anomalous-event {
+    background-color: #ffd54f; /* Yellow */
+}
+
+.migraine-headache {
+    background-color: #ff69b4; /* Bright pink */
 }
