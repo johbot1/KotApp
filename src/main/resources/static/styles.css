@@ -136,37 +136,84 @@ input[type="range"] {
     align-items: center;
 }
 
-/* When checked, change label appearance */
-input[type="checkbox"]:checked + .pill {
-    color: white;
-}
 
 /* ───────────── Custom Pill Colors ───────────── */
 .migraine-prodrome {
     background-color: #d8b4f8; /* Light purple */
 }
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .migraine-prodrome {
+    color: #D4F8B4;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
 .bechets-flare {
     background-color: #ff6b6b; /* Red */
 }
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .bechets-flare {
+    color: #6BFFFF;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
 .spotting {
-    background-color: #333; /* Black */
+    background-color: #3333; /* Black */
     color: white;
+}
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .spotting {
+    color: #000033;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .blank-pills {
     background-color: #4caf50; /* Green */
 }
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .blank-pills {
+    color: #AF4CAB;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
 .night-sweats {
     background-color: #4f8de0; /* Blue */
+}
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .night-sweats {
+    color: #E0A24F;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .anomalous-event {
     background-color: #ffd54f; /* Yellow */
 }
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .anomalous-event {
+    color: #4F79FF;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
 .migraine-headache {
     background-color: #ff69b4; /* Bright pink */
+}
+/* When checked, change label appearance */
+input[type="checkbox"]:checked + .migraine-headache {
+    color: #69FFB4;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ───────────── Workout Checkbox ───────────── */
+.workout-toggle {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
