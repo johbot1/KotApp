@@ -98,3 +98,17 @@ input[type="range"] {
     cursor: pointer;
     align-self: center;
 }
+.checkboxes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 60%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+.checkboxes-container label {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
