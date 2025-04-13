@@ -55,6 +55,6 @@
 
 * Label the number lines on the sliders
 * Modal for the Save confirmation 
-* Secondary page to LOOK at the saved data
 * Save as JSON files or CSV file
 * Clear out notes once saved/ Reset the sliders and everything
+* Secondary page to LOOK at the saved data
