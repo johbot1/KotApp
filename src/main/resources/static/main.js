@@ -1,96 +1,88 @@
+
 // Update slider value displays
 function updateSliderValue(inputId, valueId) {
-    document.getElementById(inputId).addEventListener('input', function() {
-        document.getElementById(valueId).textContent = this.value;
+    const slider = document.getElementById(inputId);
+    const valueDisplay = document.getElementById(valueId);
+    slider.addEventListener('input', function () {
+        valueDisplay.textContent = this.value;
     });
 }
 
-updateSliderValue('depressionMania', 'depressionManiaValue');
-updateSliderValue('anxiety', 'anxietyValue');
-updateSliderValue('irritability', 'irritabilityValue');
-updateSliderValue('energyLvl', 'energyLvlValue');
-
-// Function to create ticks for each slider
-function createSliderTicks(sliderId, tickCount) {
+// Create numbered ticks under each slider
+function createTicks(sliderId, min, max, step) {
     const slider = document.getElementById(sliderId);
-    const ticksContainer = slider.nextElementSibling; // Get the slider-ticks div
+    const tickContainer = slider.nextElementSibling;
+    tickContainer.innerHTML = "";
 
-    for (let i = 0; i < tickCount; i++) {
-        const tick = document.createElement('div');
-        tick.className = 'slider-tick';
-        ticksContainer.appendChild(tick);
+    for (let i = min; i <= max; i += step) {
+        const label = document.createElement("div");
+        label.className = "slider-label";
+        label.textContent = i;
+        tickContainer.appendChild(label);
     }
 }
 
-createSliderTicks('depressionMania', 21);
-createSliderTicks('anxiety', 11);
-createSliderTicks('irritability', 11);
-createSliderTicks('energyLvl', 6);
 
-// Set today's date in the nav bar
-const todayDate = new Date();
-const formattedDate = todayDate.toLocaleDateString(undefined, {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-});
-document.querySelector('.today-date').textContent = `Today: ${formattedDate}`;
+// Initialize sliders
+function initializeSliders() {
+    updateSliderValue('depressionMania', 'depressionManiaValue');
+    updateSliderValue('anxiety', 'anxietyValue');
+    updateSliderValue('irritability', 'irritabilityValue');
+    updateSliderValue('energyLvl', 'energyLvlValue');
 
-//  Save button saving the journal
-document.querySelector('.save-button').addEventListener('click', () => {
-    // Collect symptoms
-    const selectedSymptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked'))
-        .map(checkbox => checkbox.value);
+    createTicks('depressionMania', -10, 10, 5);
+    createTicks('anxiety', 0, 10, 2);
+    createTicks('irritability', 0, 10, 2);
+    createTicks('energyLvl', 0, 5, 1);
+}
 
-    if (document.getElementById('workout').checked) {
-        selectedSymptoms.push('workout');
+// Display modal
+function showModal(message) {
+    const modal = document.createElement("div");
+    modal.id = "saveModal";
+    modal.style.position = "fixed";
+    modal.style.top = "50%";
+    modal.style.left = "50%";
+    modal.style.transform = "translate(-50%, -50%)";
+    modal.style.backgroundColor = "#e0fbfc";
+    modal.style.border = "2px solid #333";
+    modal.style.padding = "20px";
+    modal.style.zIndex = "1000";
+    modal.style.textAlign = "center";
+    modal.style.borderRadius = "8px";
+    modal.innerHTML = `<p>${message}</p><button onclick="closeModal()">OK</button>`;
+    document.body.appendChild(modal);
+}
+
+function closeModal() {
+    const modal = document.getElementById("saveModal");
+    if (modal) {
+        modal.remove();
     }
+}
 
-    // Collects the slider values
-    const sliderData = {
-        depressionMania: document.getElementById('depressionMania').value,
-        anxiety: document.getElementById('anxiety').value,
-        irritability: document.getElementById('irritability').value,
-        energyLvl: document.getElementById('energyLvl').value
-    };
+// Reset form after save
+function resetForm() {
+    document.querySelectorAll("input[type='range']").forEach(slider => slider.value = 0);
+    document.getElementById("depressionMania").value = 0;
+    document.getElementById("depressionManiaValue").textContent = "0";
+    document.getElementById("anxietyValue").textContent = "0";
+    document.getElementById("irritabilityValue").textContent = "0";
+    document.getElementById("energyLvlValue").textContent = "0";
 
-    // Collects the notes
-    const notes = document.getElementById('notes').value.trim();
+    document.querySelectorAll("input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
+    document.getElementById("notes").value = "";
+}
 
-    // Basic validation
-    const hasAnyData =
-        selectedSymptoms.length > 0 ||
-        Object.values(sliderData).some(val => parseInt(val) !== 0) ||
-        notes.length > 0;
+// Save button logic
+document.addEventListener('DOMContentLoaded', function () {
+    initializeSliders();
 
-    const saveMessage = document.getElementById('saveMessage');
+    document.querySelector('.save-button').addEventListener('click', function () {
+        // Simulate save (you would send data to backend here)
+        showModal("Journal saved successfully!");
 
-// Validation block (replaces alert for empty)
-    if (!hasAnyData) {
-        saveMessage.textContent = "Please enter at least one mood, symptom, or note.";
-        saveMessage.style.color = "red";
-        saveMessage.classList.add("show");
-        return;
-    }
-
-// Message displays after successfully saving
-    saveMessage.textContent = "Journal entry saved!";
-    saveMessage.style.color = "green";
-    saveMessage.classList.add("show");
-
-// Hides after a few seconds
-    setTimeout(() => {
-        saveMessage.classList.remove("show");
-    }, 4000);
-
-
-    // Builds the Journal Entry Object
-    const journalEntry = {
-        date: new Date().toISOString(),
-        symptoms: selectedSymptoms,
-        sliders: sliderData,
-        notes: notes
-    };
-
-    console.log("Saved Journal Entry:", journalEntry);
+        // Reset the form
+        resetForm();
+    });
 });
-
-
