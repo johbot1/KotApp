@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mood Stats</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav>
+        <div class="nav-title">Mood Stats</div>
+        <div class="nav-controls">
+            <a href="index.html" class="calendar-button" title="Back to Journal">🏠</a>
+        </div>
+    </nav>
+
+    <canvas id="moodChart" width="600" height="300"></canvas>
+
+    <div class="symptom-summary">
+        <h3>Symptom Frequency</h3>
+        <ul id="symptomStats"></ul>
+    </div>
+</div>
+
+<script src="stats.js"></script>
+</body>
+</html>
