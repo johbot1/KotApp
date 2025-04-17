@@ -1,4 +1,6 @@
-// Update slider value displays in real-time
+// ───────────── SLIDER SETUP ─────────────
+
+// Update slider display text in real-time
 function updateSliderValue(inputId, valueId) {
     console.log("updateSliderValue - Attaching input listener to slider:", inputId);
     const slider = document.getElementById(inputId);
@@ -8,13 +10,12 @@ function updateSliderValue(inputId, valueId) {
     });
 }
 
-// Create labeled number ticks below each slider
+// Add visible number ticks below sliders
 function createTicks(sliderId, min, max, step) {
     console.log("createTicks - Building ticks for:", sliderId);
     const slider = document.getElementById(sliderId);
     const tickContainer = slider.nextElementSibling;
     tickContainer.innerHTML = "";
-
     for (let i = min; i <= max; i += step) {
         const label = document.createElement("div");
         label.className = "slider-label";
@@ -23,7 +24,7 @@ function createTicks(sliderId, min, max, step) {
     }
 }
 
-// Setup sliders on page load
+// Setup all sliders and ticks on load
 function initializeSliders() {
     console.log("initializeSliders - Initializing sliders and tick labels");
     updateSliderValue('depressionMania', 'depressionManiaValue');
@@ -37,7 +38,9 @@ function initializeSliders() {
     createTicks('energyLvl', 0, 5, 1);
 }
 
-// Create and display confirmation modal
+// ───────────── MODAL UTILITY ─────────────
+
+// Show a modal with a custom message
 function showModal(message) {
     console.log("showModal - Displaying modal with message:", message);
     const modal = document.createElement("div");
@@ -56,7 +59,7 @@ function showModal(message) {
     document.body.appendChild(modal);
 }
 
-// Remove modal from DOM
+// Hide modal if it exists
 function closeModal() {
     console.log("closeModal - Removing modal from screen");
     const modal = document.getElementById("saveModal");
@@ -65,7 +68,9 @@ function closeModal() {
     }
 }
 
-// Function to ensure journal has valid data attached before saving
+// ───────────── VALIDATION ─────────────
+
+// Check if all fields are untouched / empty
 function validateJournal() {
     const sliderIds = ["depressionMania", "anxiety", "irritability", "energyLvl"];
     const slidersUnchanged = sliderIds.every(id => document.getElementById(id).value === "0");
@@ -87,9 +92,9 @@ function validateJournal() {
     };
 }
 
+// ───────────── CORE JOURNAL ACTIONS ─────────────
 
-
-// Save journal entry to localStorage
+// Save the journal entry to localStorage
 function saveJournalToLocalStorage(entry) {
     console.log("saveJournalToLocalStorage - Appending new journal entry");
     const existing = JSON.parse(localStorage.getItem("moodJournalEntries") || "[]");
@@ -97,7 +102,7 @@ function saveJournalToLocalStorage(entry) {
     localStorage.setItem("moodJournalEntries", JSON.stringify(existing));
 }
 
-// Reset form input fields and UI
+// Reset all fields back to default after submission
 function resetForm() {
     console.log("resetForm - Resetting all inputs");
     document.querySelectorAll("input[type='range']").forEach(slider => slider.value = 0);
@@ -110,25 +115,29 @@ function resetForm() {
     document.getElementById("notes").value = "";
 }
 
-// On load: initialize sliders and wire up Save button
+// ───────────── ON PAGE LOAD ─────────────
+
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOMContentLoaded - App initialized");
     initializeSliders();
 
+    // Save button click handler
     document.querySelector('.save-button').addEventListener('click', function () {
         console.log("save-button - Clicked");
         const validation = validateJournal();
-        // Validate the journal has proper information
+
+        // Prevent saving if all inputs are empty
         if (!validation.valid) {
             showModal(validation.messages.join("<br>"));
             return;
         }
 
+        // Build new journal entry
         const date = new Date().toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
             day: "numeric"
-        }); // e.g. "Apr 16, 2025"
+        });
 
         const journalEntry = {
             date,
@@ -155,9 +164,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Download current entry as CSV
+// ───────────── CSV EXPORTS ─────────────
+
+// Export current entry only
 document.getElementById("downloadCsv").addEventListener("click", function () {
     console.log("downloadCsv - Exporting current entry");
+
     const date = new Date().toISOString().split("T")[0];
 
     const sliders = {
@@ -183,7 +195,7 @@ document.getElementById("downloadCsv").addEventListener("click", function () {
         symptomValues[id] = checked ? 1 : 0;
     });
 
-    const notes = document.getElementById("notes").value.replace(/"/g, '""'); // Escape quotes
+    const notes = document.getElementById("notes").value.replace(/"/g, '""');
 
     const headers = [
         "Date", "Depression/Mania", "Anxiety", "Irritability", "Energy",
@@ -211,7 +223,7 @@ document.getElementById("downloadCsv").addEventListener("click", function () {
     document.body.removeChild(link);
 });
 
-// Download all journal entries as CSV
+// Export all entries as CSV
 document.getElementById("downloadAllCsv").addEventListener("click", function () {
     console.log("downloadAllCsv - Exporting all saved entries");
 

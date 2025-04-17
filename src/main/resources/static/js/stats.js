@@ -1,4 +1,8 @@
+// ───────────── MODAL FOR EMPTY DATA ─────────────
+
+// Reusable modal to show messages and trigger callbacks (like redirects)
 function showModal(message, callback) {
+    console.log("showModal - Displaying modal with message:", message);
     const modal = document.createElement("div");
     modal.id = "saveModal";
     modal.style.position = "fixed";
@@ -16,16 +20,19 @@ function showModal(message, callback) {
 
     document.getElementById("modalOk").addEventListener("click", () => {
         modal.remove();
-        if (callback) callback(); // Run redirect or close logic
+        if (callback) callback(); // Redirect or custom logic
     });
 }
+
+// ───────────── PAGE LOGIC ─────────────
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOMContentLoaded - Initializing mood statistics page");
 
-    // Load journal entries from localStorage or fallback to empty array
+    // Load journal entries from localStorage
     const entries = JSON.parse(localStorage.getItem("moodJournalEntries") || "[]");
 
+    // If no data, inform user and redirect back home
     if (entries.length === 0) {
         console.warn("DOMContentLoaded - No journal entries found");
         showModal("No journal data found! Click to return home and create your first entry!", () => {
@@ -34,18 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Extract mood values from entries
     console.log("buildChartData - Parsing slider data from journal entries");
-
-    // Extract slider values per entry to use in line chart
     const labels = entries.map(entry => entry.date);
     const depressionData = entries.map(entry => Number(entry.depressionMania));
     const anxietyData = entries.map(entry => Number(entry.anxiety));
     const irritabilityData = entries.map(entry => Number(entry.irritability));
     const energyData = entries.map(entry => Number(entry.energyLvl));
 
-    console.log("renderChart - Drawing mood trend chart");
-
     // Render mood trend line chart using Chart.js
+    console.log("renderChart - Drawing mood trend chart");
     const ctx = document.getElementById("moodChart").getContext("2d");
     new Chart(ctx, {
         type: "line",
@@ -96,22 +101,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 tooltip: {
                     callbacks: {
                         title: function (tooltipItems) {
-                            // Use formatted date directly
-                            return tooltipItems[0].label;
+                            return tooltipItems[0].label; // Use friendly formatted date
                         }
                     }
                 }
             }
         }
-
     });
 
+    // Tally how many times each symptom/workout was checked
     console.log("calculateSymptomCounts - Counting symptom frequency");
-
-    // Tally how often each symptom appeared across entries
     const symptomCounts = {};
     const symptomKeys = [...Object.keys(entries[0].symptoms), "workout"];
-
     symptomKeys.forEach(key => symptomCounts[key] = 0);
 
     entries.forEach(entry => {
@@ -124,9 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Display the symptom summary under the chart
     console.log("renderSymptomSummary - Populating symptom count list");
-
-    // Populate the symptom summary list on the page
     const symptomLabels = {
         migraineProdrome: "Migraine Prodrome",
         bechetsFlare: "Bechets Flare",
@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
         migraineHeadache: "Migraine Headache",
         workout: "Workouts"
     };
+
     const list = document.getElementById("symptomStats");
     symptomKeys.forEach(key => {
         const li = document.createElement("li");
