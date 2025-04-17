@@ -1,0 +1,92 @@
+To add 7 days worth of journals for testing,
+run the app, open developer tools, then paste the following into the console:
+(function injectFakeWeek() {
+    console.log("injectFakeWeek - Adding 7 test journal entries");
+
+    const existing = JSON.parse(localStorage.getItem("moodJournalEntries") || "[]");
+
+    const baseDate = new Date();
+    baseDate.setDate(baseDate.getDate() - 6); // Start 6 days ago
+
+    const fakeEntries = [];
+
+    for (let i = 0; i < 7; i++) {
+        const entryDate = new Date(baseDate);
+        entryDate.setDate(baseDate.getDate() + i);
+
+        const formattedDate = entryDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        });
+
+        fakeEntries.push({
+            date: formattedDate,
+            depressionMania: Math.floor(Math.random() * 21) - 10,
+            anxiety: Math.floor(Math.random() * 11),
+            irritability: Math.floor(Math.random() * 11),
+            energyLvl: Math.floor(Math.random() * 6),
+            workout: Math.random() < 0.5,
+            notes: "Auto-generated entry for testing",
+            symptoms: {
+                migraineProdrome: Math.random() < 0.2,
+                bechetsFlare: Math.random() < 0.2,
+                spotting: Math.random() < 0.1,
+                blankPills: Math.random() < 0.2,
+                nightSweats: Math.random() < 0.3,
+                anomalousEvent: Math.random() < 0.15,
+                migraineHeadache: Math.random() < 0.25
+            }
+        });
+    }
+
+    localStorage.setItem("moodJournalEntries", JSON.stringify([...existing, ...fakeEntries]));
+    alert("✅ Injected 7 test entries! Reload the stats page to view them.");
+})();
+
+
+To add 30 days worth of journals for testing,
+run the app, open developer tools, then paste the following into the console:
+
+(function injectFakeMonth() {
+    console.log("injectFakeMonth - Adding 30 test journal entries");
+
+    const existing = JSON.parse(localStorage.getItem("moodJournalEntries") || []);
+    const baseDate = new Date();
+    baseDate.setDate(baseDate.getDate() - 29); // Start 29 days ago
+
+    const fakeEntries = [];
+
+    for (let i = 0; i < 30; i++) {
+        const entryDate = new Date(baseDate);
+        entryDate.setDate(baseDate.getDate() + i);
+
+        const formattedDate = entryDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        });
+
+        fakeEntries.push({
+            date: formattedDate,
+            depressionMania: Math.floor(Math.random() * 21) - 10,
+            anxiety: Math.floor(Math.random() * 11),
+            irritability: Math.floor(Math.random() * 11),
+            energyLvl: Math.floor(Math.random() * 6),
+            workout: Math.random() < 0.45,
+            notes: `Mood log for ${formattedDate}`,
+            symptoms: {
+                migraineProdrome: Math.random() < 0.15,
+                bechetsFlare: Math.random() < 0.1,
+                spotting: Math.random() < 0.05,
+                blankPills: Math.random() < 0.1,
+                nightSweats: Math.random() < 0.25,
+                anomalousEvent: Math.random() < 0.1,
+                migraineHeadache: Math.random() < 0.2
+            }
+        });
+    }
+
+    localStorage.setItem("moodJournalEntries", JSON.stringify([...existing, ...fakeEntries]));
+    alert("✅ Injected 30 test entries! Head to the Stats page to view them.");
+})();
