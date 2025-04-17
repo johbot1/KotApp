@@ -94,7 +94,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.save-button').addEventListener('click', function () {
         console.log("save-button - Clicked");
 
-        const date = new Date().toISOString().split("T")[0];
+        const date = new Date().toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        }); // e.g. "Apr 16, 2025"
+
         const journalEntry = {
             date,
             depressionMania: document.getElementById("depressionMania").value,
