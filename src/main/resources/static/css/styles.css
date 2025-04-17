@@ -58,6 +58,13 @@ nav {
     background-color: #b8ccc2;
 }
 
+.calendar-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+
 /* ───────────── Sliders ───────────── */
 .sliders-container {
     display: flex;
