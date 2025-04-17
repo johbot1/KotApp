@@ -1,6 +1,6 @@
-
-// Update slider value displays
+// Update slider value displays in real-time
 function updateSliderValue(inputId, valueId) {
+    console.log("updateSliderValue - Attaching input listener to slider:", inputId);
     const slider = document.getElementById(inputId);
     const valueDisplay = document.getElementById(valueId);
     slider.addEventListener('input', function () {
@@ -8,8 +8,9 @@ function updateSliderValue(inputId, valueId) {
     });
 }
 
-// Create numbered ticks under each slider
+// Create labeled number ticks below each slider
 function createTicks(sliderId, min, max, step) {
+    console.log("createTicks - Building ticks for:", sliderId);
     const slider = document.getElementById(sliderId);
     const tickContainer = slider.nextElementSibling;
     tickContainer.innerHTML = "";
@@ -22,9 +23,9 @@ function createTicks(sliderId, min, max, step) {
     }
 }
 
-
-// Initialize sliders
+// Setup sliders on page load
 function initializeSliders() {
+    console.log("initializeSliders - Initializing sliders and tick labels");
     updateSliderValue('depressionMania', 'depressionManiaValue');
     updateSliderValue('anxiety', 'anxietyValue');
     updateSliderValue('irritability', 'irritabilityValue');
@@ -36,8 +37,9 @@ function initializeSliders() {
     createTicks('energyLvl', 0, 5, 1);
 }
 
-// Display modal
+// Create and display confirmation modal
 function showModal(message) {
+    console.log("showModal - Displaying modal with message:", message);
     const modal = document.createElement("div");
     modal.id = "saveModal";
     modal.style.position = "fixed";
@@ -54,24 +56,27 @@ function showModal(message) {
     document.body.appendChild(modal);
 }
 
+// Remove modal from DOM
 function closeModal() {
+    console.log("closeModal - Removing modal from screen");
     const modal = document.getElementById("saveModal");
     if (modal) {
         modal.remove();
     }
 }
 
+// Save journal entry to localStorage
 function saveJournalToLocalStorage(entry) {
+    console.log("saveJournalToLocalStorage - Appending new journal entry");
     const existing = JSON.parse(localStorage.getItem("moodJournalEntries") || "[]");
     existing.push(entry);
     localStorage.setItem("moodJournalEntries", JSON.stringify(existing));
 }
 
-
-// Reset form after save
+// Reset form input fields and UI
 function resetForm() {
+    console.log("resetForm - Resetting all inputs");
     document.querySelectorAll("input[type='range']").forEach(slider => slider.value = 0);
-    document.getElementById("depressionMania").value = 0;
     document.getElementById("depressionManiaValue").textContent = "0";
     document.getElementById("anxietyValue").textContent = "0";
     document.getElementById("irritabilityValue").textContent = "0";
@@ -81,10 +86,14 @@ function resetForm() {
     document.getElementById("notes").value = "";
 }
 
-// Save button logic
+// On load: initialize sliders and wire up Save button
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOMContentLoaded - App initialized");
     initializeSliders();
+
     document.querySelector('.save-button').addEventListener('click', function () {
+        console.log("save-button - Clicked");
+
         const date = new Date().toISOString().split("T")[0];
         const journalEntry = {
             date,
@@ -104,15 +113,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
 
-        saveJournalToLocalStorage(journalEntry); // MUST be before reset
+        saveJournalToLocalStorage(journalEntry);
         showModal("Journal saved successfully!");
-        resetForm(); // Reset after saving
+        resetForm();
     });
-
 });
 
-// Download Button logic
+// Download current entry as CSV
 document.getElementById("downloadCsv").addEventListener("click", function () {
+    console.log("downloadCsv - Exporting current entry");
     const date = new Date().toISOString().split("T")[0];
 
     const sliders = {
@@ -123,13 +132,13 @@ document.getElementById("downloadCsv").addEventListener("click", function () {
     };
 
     const symptoms = [
-        "migraineProdrome",
-        "bechetsFlare",
-        "spotting",
-        "blankPills",
-        "nightSweats",
-        "anomalousEvent",
-        "migraineHeadache"
+        "Migraine Prodrome",
+        "Bechets Flare",
+        "Spotting",
+        "Blank Pills",
+        "Night Sweats",
+        "Anomalous Event",
+        "Migraine Headache"
     ];
 
     const symptomValues = {};
@@ -140,15 +149,9 @@ document.getElementById("downloadCsv").addEventListener("click", function () {
 
     const notes = document.getElementById("notes").value.replace(/"/g, '""'); // Escape quotes
 
-    // Build CSV content
     const headers = [
-        "Date",
-        "Depression/Mania",
-        "Anxiety",
-        "Irritability",
-        "Energy",
-        ...symptoms.map(id => id),
-        "Notes"
+        "Date", "Depression/Mania", "Anxiety", "Irritability", "Energy",
+        ...symptoms, "Notes"
     ];
 
     const values = [
@@ -163,7 +166,6 @@ document.getElementById("downloadCsv").addEventListener("click", function () {
 
     const csvContent = `${headers.join(",")}\n${values.join(",")}`;
 
-    // Trigger download
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.setAttribute("href", URL.createObjectURL(blob));
@@ -173,28 +175,21 @@ document.getElementById("downloadCsv").addEventListener("click", function () {
     document.body.removeChild(link);
 });
 
-//Download All button logic
+// Download all journal entries as CSV
 document.getElementById("downloadAllCsv").addEventListener("click", function () {
+    console.log("downloadAllCsv - Exporting all saved entries");
+
     const entries = JSON.parse(localStorage.getItem("moodJournalEntries") || "[]");
     if (entries.length === 0) {
+        console.warn("downloadAllCsv - No entries found");
         alert("No journal entries found.");
         return;
     }
 
     const headers = [
-        "Date",
-        "Depression/Mania",
-        "Anxiety",
-        "Irritability",
-        "Energy",
-        "Migraine Prodrome",
-        "Bechets Flare",
-        "Spotting",
-        "Blank Pills",
-        "Night Sweats",
-        "Anomalous Event",
-        "Migraine Headache",
-        "Notes"
+        "Date", "Depression/Mania", "Anxiety", "Irritability", "Energy",
+        "Migraine Prodrome", "Bechets Flare", "Spotting", "Blank Pills",
+        "Night Sweats", "Anomalous Event", "Migraine Headache", "Notes"
     ];
 
     const rows = entries.map(entry => {
