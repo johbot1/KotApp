@@ -65,6 +65,30 @@ function closeModal() {
     }
 }
 
+// Function to ensure journal has valid data attached before saving
+function validateJournal() {
+    const sliderIds = ["depressionMania", "anxiety", "irritability", "energyLvl"];
+    const slidersUnchanged = sliderIds.every(id => document.getElementById(id).value === "0");
+
+    const checkboxes = [...document.querySelectorAll("input[type='checkbox']")];
+    const checkboxesUnchecked = checkboxes.every(cb => !cb.checked);
+
+    const notesEmpty = document.getElementById("notes").value.trim() === "";
+
+    const messages = [];
+
+    if (slidersUnchanged) messages.push("You haven't adjusted any mood sliders.");
+    if (checkboxesUnchecked) messages.push("No symptoms or workout have been selected.");
+    if (notesEmpty) messages.push("Notes section is empty.");
+
+    return {
+        valid: !(slidersUnchanged && checkboxesUnchecked && notesEmpty),
+        messages
+    };
+}
+
+
+
 // Save journal entry to localStorage
 function saveJournalToLocalStorage(entry) {
     console.log("saveJournalToLocalStorage - Appending new journal entry");
@@ -93,6 +117,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.save-button').addEventListener('click', function () {
         console.log("save-button - Clicked");
+        const validation = validateJournal();
+        // Validate the journal has proper information
+        if (!validation.valid) {
+            showModal(validation.messages.join("<br>"));
+            return;
+        }
 
         const date = new Date().toLocaleDateString("en-US", {
             year: "numeric",
@@ -106,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             anxiety: document.getElementById("anxiety").value,
             irritability: document.getElementById("irritability").value,
             energyLvl: document.getElementById("energyLvl").value,
+            workout: document.getElementById("workout").checked,
             notes: document.getElementById("notes").value,
             symptoms: {
                 migraineProdrome: document.getElementById("migraineProdrome").checked,

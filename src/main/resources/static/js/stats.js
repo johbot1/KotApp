@@ -11,7 +11,7 @@ function showModal(message, callback) {
     modal.style.zIndex = "1000";
     modal.style.textAlign = "center";
     modal.style.borderRadius = "8px";
-    modal.innerHTML = `<p>${message}</p><button id="modalOk">OK</button>`;
+    modal.innerHTML = `<p>${message}</p><button id="modalOk">Return Home</button>`;
     document.body.appendChild(modal);
 
     document.getElementById("modalOk").addEventListener("click", () => {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (entries.length === 0) {
         console.warn("DOMContentLoaded - No journal entries found");
-        showModal("No journal data found! Click OK to create your first entry!", () => {
+        showModal("No journal data found! Click to return home and create your first entry!", () => {
             window.location.href = "index.html";
         });
         return;
