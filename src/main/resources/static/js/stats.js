@@ -1,3 +1,25 @@
+function showModal(message, callback) {
+    const modal = document.createElement("div");
+    modal.id = "saveModal";
+    modal.style.position = "fixed";
+    modal.style.top = "50%";
+    modal.style.left = "50%";
+    modal.style.transform = "translate(-50%, -50%)";
+    modal.style.backgroundColor = "#e0fbfc";
+    modal.style.border = "2px solid #333";
+    modal.style.padding = "20px";
+    modal.style.zIndex = "1000";
+    modal.style.textAlign = "center";
+    modal.style.borderRadius = "8px";
+    modal.innerHTML = `<p>${message}</p><button id="modalOk">OK</button>`;
+    document.body.appendChild(modal);
+
+    document.getElementById("modalOk").addEventListener("click", () => {
+        modal.remove();
+        if (callback) callback(); // Run redirect or close logic
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOMContentLoaded - Initializing mood statistics page");
 
@@ -6,7 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (entries.length === 0) {
         console.warn("DOMContentLoaded - No journal entries found");
-        alert("No journal data to display.");
+        showModal("No journal data found! Click OK to create your first entry!", () => {
+            window.location.href = "index.html";
+        });
         return;
     }
 
