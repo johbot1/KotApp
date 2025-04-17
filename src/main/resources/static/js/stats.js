@@ -57,21 +57,46 @@ document.addEventListener("DOMContentLoaded", () => {
         options: {
             responsive: true,
             scales: {
-                y: { beginAtZero: true }
+                x: {
+                    ticks: {
+                        autoSkip: true,
+                        maxRotation: 45,
+                        minRotation: 30
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function (tooltipItems) {
+                            // Use formatted date directly
+                            return tooltipItems[0].label;
+                        }
+                    }
+                }
             }
         }
+
     });
 
     console.log("calculateSymptomCounts - Counting symptom frequency");
 
     // Tally how often each symptom appeared across entries
     const symptomCounts = {};
-    const symptomKeys = Object.keys(entries[0].symptoms);
+    const symptomKeys = [...Object.keys(entries[0].symptoms), "workout"];
+
     symptomKeys.forEach(key => symptomCounts[key] = 0);
 
     entries.forEach(entry => {
         symptomKeys.forEach(key => {
-            if (entry.symptoms[key]) symptomCounts[key]++;
+            if (key === "workout") {
+                if (entry.workout) symptomCounts[key]++;
+            } else {
+                if (entry.symptoms[key]) symptomCounts[key]++;
+            }
         });
     });
 
@@ -81,11 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const symptomLabels = {
         migraineProdrome: "Migraine Prodrome",
         bechetsFlare: "Bechets Flare",
-        spotting: "Spotting",
+        spotting: "Spotting / Bleeding",
         blankPills: "Blank Pills",
         nightSweats: "Night Sweats / Nightmares",
         anomalousEvent: "Anomalous Event",
-        migraineHeadache: "Migraine Headache"
+        migraineHeadache: "Migraine Headache",
+        workout: "Workouts"
     };
     const list = document.getElementById("symptomStats");
     symptomKeys.forEach(key => {
