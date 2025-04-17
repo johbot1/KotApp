@@ -78,10 +78,20 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("renderSymptomSummary - Populating symptom count list");
 
     // Populate the symptom summary list on the page
+    const symptomLabels = {
+        migraineProdrome: "Migraine Prodrome",
+        bechetsFlare: "Bechets Flare",
+        spotting: "Spotting",
+        blankPills: "Blank Pills",
+        nightSweats: "Night Sweats / Nightmares",
+        anomalousEvent: "Anomalous Event",
+        migraineHeadache: "Migraine Headache"
+    };
     const list = document.getElementById("symptomStats");
     symptomKeys.forEach(key => {
         const li = document.createElement("li");
-        li.textContent = `${key}: ${symptomCounts[key]} times`;
+        const label = symptomLabels[key] || key;
+        li.textContent = `${label}: ${symptomCounts[key]} times`;
         list.appendChild(li);
     });
 
