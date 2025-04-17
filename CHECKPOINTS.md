@@ -31,30 +31,24 @@
     * Implement a service that handles saving the form data to a CSV file.
     * Ensure each submission is appended to the CSV.
 
-## 3. Data Retrieval and Graphing
+## 3. Local Testing and Refinement
 
-* **3.1 CSV Data Parsing:**
-    * Implement a function to read and parse the CSV file into a list of mood journal data objects.
-    * Handle potential errors during file reading and parsing.
-
-## 4. Local Testing and Refinement
-
-* **4.1 Unit and Integration Testing:**
-    * Write unit tests for data parsing, CSV generation, and data aggregation.
-    * Test the API endpoints.
-    * Test the javascript graphing functionality.
-* **4.2 Local Execution and Iteration:**
-    * Test the application locally by running the Ktor server.
-    * Refine the user interface and data visualization based on local testing.
-    * Verify CSV file integrity after multiple entries.
-* **4.3 Error Handling and Local File Management**
+* **3.1 Unit and Integration Testing:** ✅
+    * Write unit tests for data parsing, CSV generation, and data aggregation. ✅
+    * Test the API endpoints. ✅
+    * Test the javascript graphing functionality. ✅
+* **3.2 Local Execution and Iteration:** 
+    * Test the application locally by running the Ktor server. ✅
+    * Refine the user interface and data visualization based on local testing. 
+    * Verify CSV file integrity after multiple entries. ✅
+* **3.3 Error Handling and Local File Management** 
     * Add better error handling for file reading and writing.
     * Ensure that the application can handle missing CSV files.
 
-## 5. Feedback
+## 4. Feedback
 
 * Label the number lines on the sliders ✅
 * Modal for the Save confirmation ✅
 * Save as JSON files or CSV file ✅
 * Clear out notes once saved/ Reset the sliders and everything ✅
-* Secondary page to LOOK at the saved data
+* Secondary page to LOOK at the saved data ✅
