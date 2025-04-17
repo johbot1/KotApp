@@ -34,21 +34,21 @@
     * Ensure new submissions are appended without overwriting ✅
     * Provide fallback for long-term backup (via manual CSV download) ✅
 
-## 3. Local Testing and Refinement
+## 3. Local Testing and Refinement ✅
 
 * **3.1 Unit and Integration Testing:** ✅
     * Write unit tests for data parsing, CSV generation, and data aggregation. ✅
     * Test the API endpoints. ✅
     * Test the javascript graphing functionality. ✅
-* **3.2 Local Execution and Iteration:** 
+* **3.2 Local Execution and Iteration:** ✅
     * Test the application locally by running the Ktor server. ✅
-    * Refine the user interface and data visualization based on local testing. 
+    * Refine the user interface and data visualization based on local testing. ✅ 
     * Verify CSV file integrity after multiple entries. ✅
-* **3.3 Error Handling and Local File Management** 
-    * Add better error handling for file reading and writing.
-    * Ensure that the application can handle missing CSV files.
+* **3.3 Error Handling and Local File Management** ✅
+    * Add better error handling for file reading and writing. ✅
+    * Ensure that the application can handle downloading CSV files. ✅
 
-## 4. Feedback
+## 4. Feedback ✅
 
 * Label the number lines on the sliders ✅
 * Modal for the Save confirmation ✅
