@@ -185,7 +185,7 @@ document.getElementById("downloadAllCsv").addEventListener("click", function () 
 
     const rows = entries.map(entry => {
         return [
-            entry.date,
+            `"${entry.date}"`,
             entry.depressionMania,
             entry.anxiety,
             entry.irritability,
