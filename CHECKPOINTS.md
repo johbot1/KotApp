@@ -48,10 +48,12 @@
     * Add better error handling for file reading and writing. ✅
     * Ensure that the application can handle downloading CSV files. ✅
 
-## 4. Feedback ✅
+## 4. Feedback 
 
 * Label the number lines on the sliders ✅
 * Modal for the Save confirmation ✅
-* Save as JSON files or CSV file ✅
+* Save as ~~JSON files~~ or CSV file ✅
 * Clear out notes once saved/ Reset the sliders and everything ✅
 * Secondary page to LOOK at the saved data ✅
+* Dates/ Notes be in "" in CSV
+* Fix "DownloadCSV" Button
