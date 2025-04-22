@@ -166,63 +166,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // ───────────── CSV EXPORTS ─────────────
 
-// Export current entry only
-document.getElementById("downloadCsv").addEventListener("click", function () {
-    console.log("downloadCsv - Exporting current entry");
-
-    const date = new Date().toISOString().split("T")[0];
-
-    const sliders = {
-        depressionMania: document.getElementById("depressionMania").value,
-        anxiety: document.getElementById("anxiety").value,
-        irritability: document.getElementById("irritability").value,
-        energyLvl: document.getElementById("energyLvl").value,
-    };
-
-    const symptoms = [
-        "Migraine Prodrome",
-        "Bechets Flare",
-        "Spotting",
-        "Blank Pills",
-        "Night Sweats",
-        "Anomalous Event",
-        "Migraine Headache"
-    ];
-
-    const symptomValues = {};
-    symptoms.forEach(id => {
-        const checked = document.getElementById(id).checked;
-        symptomValues[id] = checked ? 1 : 0;
-    });
-
-    const notes = document.getElementById("notes").value.replace(/"/g, '""');
-
-    const headers = [
-        "Date", "Depression/Mania", "Anxiety", "Irritability", "Energy",
-        ...symptoms, "Notes"
-    ];
-
-    const values = [
-        date,
-        sliders.depressionMania,
-        sliders.anxiety,
-        sliders.irritability,
-        sliders.energyLvl,
-        ...symptoms.map(id => symptomValues[id]),
-        `"${notes}"`
-    ];
-
-    const csvContent = `${headers.join(",")}\n${values.join(",")}`;
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    link.setAttribute("href", URL.createObjectURL(blob));
-    link.setAttribute("download", `mood-journal-${date}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-});
-
 // Export all entries as CSV
 document.getElementById("downloadAllCsv").addEventListener("click", function () {
     console.log("downloadAllCsv - Exporting all saved entries");

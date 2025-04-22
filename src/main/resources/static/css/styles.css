@@ -133,13 +133,15 @@ input[type="range"] {
 
 /* ───────────── Save Button ───────────── */
 .save-button {
-    background-color: #e0fbfc;
+    margin-top: 10px;
+    background-color: #d8e2dc;
     color: black;
-    padding: 10px 20px;
-    border: none;
+    padding: 8px 16px;
+    border: 1px solid #333;
     border-radius: 5px;
     cursor: pointer;
-    align-self: center;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
 }
 /* ───────────── Download Button ───────────── */
 .download-button {

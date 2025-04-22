@@ -56,4 +56,4 @@
 * Clear out notes once saved/ Reset the sliders and everything ✅
 * Secondary page to LOOK at the saved data ✅
 * Dates/ Notes be in "" in CSV
-* Fix "DownloadCSV" Button
+* Fix "DownloadCSV" Button [REMOVED] ✅
