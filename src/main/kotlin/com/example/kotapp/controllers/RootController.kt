@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller
  * web requests
  */
 @Controller //Controllers handle web requests
-class HelloController {
+class RootController {
     /**
      * Handles GET requests to the root URL '/'
      * Reads and returns the contents of 'index.html' from the 'static' folder.
